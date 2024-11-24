@@ -77,6 +77,8 @@
     "cspell": "^8.14.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",
+    "eslint-plugin-jest-dom": "^5.5.0",
+    "eslint-plugin-testing-library": "^7.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.39",
