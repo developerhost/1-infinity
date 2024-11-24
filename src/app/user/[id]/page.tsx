@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { api } from "@/trpc/server";
 import { notFound } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
