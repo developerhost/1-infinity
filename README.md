@@ -27,3 +27,11 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## プロジェクト立ち上げ方法
+
+1. .envに環境変数を設定する
+2. pnpm installで依存関係をインストールする
+3. `pnpm run db:start`でDBを立ち上げる
+4. `pnpm run db:generate`でDBのスキーマを生成する
+5. `pnpm run dev`で開発サーバーを立ち上げる
