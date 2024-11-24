@@ -35,3 +35,9 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 3. `pnpm run db:start`でDBを立ち上げる
 4. `pnpm run db:generate`でDBのスキーマを生成する
 5. `pnpm run dev`で開発サーバーを立ち上げる
+
+## コード規約
+- apiは`src/server/api/routers`に作っていく
+  - 一つのサービスが肥大化してきたらファイル分割する
+- `src/components`はshad/cnのコンポーネント
+- `src/app/_components`はドメインごとにフォルダ分けしていく
