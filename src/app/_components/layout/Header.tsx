@@ -15,13 +15,16 @@ export default async function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between border-b-2 bg-black bg-opacity-80 px-4 py-3 text-primary-foreground shadow-sm">
       <Link href="/" className="text-lg font-bold">
-        Live Memory
+        1-infinity
       </Link>
       {session ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={session.user.image ?? "/assets/img/default.png"} alt="User Avatar" />
+              <AvatarImage
+                src={session.user.image ?? "/assets/img/default.png"}
+                alt="User Avatar"
+              />
               <AvatarFallback>
                 {session.user.name?.charAt(0) ?? "U"}
               </AvatarFallback>

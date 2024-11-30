@@ -18,9 +18,9 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Live Memory ライブ履歴からプロフィールを簡単に作成",
+  title: "1-infinity 1/2をひたすら当てていくゲーム",
   description:
-    "Live Memory はライブ履歴からプロフィールを簡単に作成できるサービスです。",
+    "1-infinity は1/2をひたすら当てていき、ベスト記録を目指すシンプルなブラウザゲームです。",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
