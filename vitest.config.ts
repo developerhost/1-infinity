@@ -2,8 +2,10 @@ import { defineConfig } from "vitest/config";
 import path from "path";
 import dotenv from "dotenv";
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-dotenv.config({ path: ".env.test" });
+// GitHub Actionsの場合、Secretsから環境変数が渡されるため .env を読み込まない
+if (!process.env.CI) {
+  dotenv.config({ path: ".env.test" });
+}
 
 export default defineConfig({
   test: {
