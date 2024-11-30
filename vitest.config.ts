@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 // GitHub Actionsの場合、Secretsから環境変数が渡されるため .env を読み込まない
 if (!process.env.CI) {
-  dotenv.config({ path: ".env.test" });
+  dotenv.config({ path: ".env" });
 }
 
 export default defineConfig({
