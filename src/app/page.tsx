@@ -1,15 +1,19 @@
-import { api, HydrateClient } from "@/trpc/server";
-import UserCardList from "./_components/user/UserCardList";
+import { HydrateClient } from "@/trpc/server";
 import SafeSuspense from "./_components/SafeSuspense";
+import Game from "./_components/game/Game";
 
 export default async function Home() {
-  const users = await api.user.getUserList();
-
   return (
     <HydrateClient>
       <SafeSuspense>
-        <h1 className="mb-6 text-2xl font-bold">Users</h1>
-        <UserCardList users={users} />
+        <h1 className="mb-6 text-2xl font-bold">
+          1/2をひたすら当てていき
+          <br />
+          ベスト記録を目指すシンプルな
+          <br />
+          ブラウザゲーム
+        </h1>
+        <Game />
       </SafeSuspense>
     </HydrateClient>
   );
