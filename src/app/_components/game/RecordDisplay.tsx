@@ -1,14 +1,21 @@
 import React from "react";
 
 type RecordDisplayProps = {
-  record: number;
+  currentRecord: number;
+  bestRecord: number;
 };
 
-const RecordDisplay = ({ record }: RecordDisplayProps) => {
+const RecordDisplay = ({ currentRecord, bestRecord }: RecordDisplayProps) => {
   // 1/1 -> 1/2, 2 -> 1/4, etc.
-  const displayValue = `1/${record === 1 ? 1 : 2 ** (record - 1)}`;
+  const formatRecord = (record: number) =>
+    `1/${record === 1 ? 1 : 2 ** (record - 1)}`;
 
-  return <div className="mb-4 text-xl font-semibold">記録: {displayValue}</div>;
+  return (
+    <div className="mt-8 text-xl font-semibold">
+      <div>現在の記録: {formatRecord(currentRecord)}</div>
+      <div className="mt-40">ベスト記録: {formatRecord(bestRecord)}</div>
+    </div>
+  );
 };
 
 export default RecordDisplay;

@@ -9,7 +9,7 @@ type ButtonGroupProps = {
 
 const ButtonGroup = ({ onClick }: ButtonGroupProps) => {
   return (
-    <div className="flex space-x-4">
+    <div className="mt-24 flex space-x-4">
       <Button
         color="red"
         onClick={() => onClick("red")}
