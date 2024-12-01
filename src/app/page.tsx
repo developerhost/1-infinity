@@ -1,7 +1,7 @@
 import { HydrateClient } from "@/trpc/server";
 import SafeSuspense from "./_components/SafeSuspense";
 import Game from "./_components/game/Game";
-// import GA from "./_components/GA";
+import GA from "./_components/GA";
 
 export default async function Home() {
   return (
@@ -15,6 +15,7 @@ export default async function Home() {
           ブラウザゲーム
         </h1>
         <Game />
+        <GA />
       </SafeSuspense>
     </HydrateClient>
   );

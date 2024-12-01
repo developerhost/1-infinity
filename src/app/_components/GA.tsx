@@ -1,21 +1,21 @@
 "use client";
-import { useRouter } from "next/router";
+
+import { usePathname } from "next/navigation";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import * as gtag from "src/lib/gtag";
 
 export default function GA() {
-  const router = useRouter();
+  const pathname = usePathname();
+  const previousPathname = useRef("");
 
+  // ページ遷移時にページビューを送信
   useEffect(() => {
-    const handleRouterChange = (url: string) => {
-      gtag.pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouterChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouterChange);
-    };
-  }, [router.events]);
+    if (previousPathname.current && previousPathname.current !== pathname) {
+      gtag.pageview(pathname);
+    }
+    previousPathname.current = pathname;
+  }, [pathname]);
 
   return (
     <>
@@ -32,7 +32,9 @@ export default function GA() {
            function gtag(){dataLayer.push(arguments);}
            gtag('js', new Date());
 
-           gtag('config', '${gtag.GA_MEASUREMENT_ID}');
+           gtag('config', '${gtag.GA_MEASUREMENT_ID}', {
+             page_path: window.location.pathname,
+           });
            `,
         }}
       />
