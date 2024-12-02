@@ -7,25 +7,12 @@ import {
 import { TRPCError } from "@trpc/server";
 import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
 import { extractPublicId } from "cloudinary-build-url";
+import { getUserById } from "./user/getUserById";
 
 export const userRouter = createTRPCRouter({
   getUserById: publicProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const user = await ctx.db.user.findUnique({
-        where: { id: input.id },
-        select: {
-          id: true,
-          name: true,
-          image: true,
-          introduction: true,
-        },
-      });
-      if (!user) {
-        throw new Error("User not found");
-      }
-      return user;
-    }),
+    .query(getUserById),
 
   getUserList: publicProcedure.query(async ({ ctx }) => {
     const users = await ctx.db.user.findMany({
