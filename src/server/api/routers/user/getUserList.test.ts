@@ -12,7 +12,12 @@ const mockDb = {
   },
 } as unknown as PrismaClient;
 
-const mockContext: Context = { db: mockDb };
+const mockHeaders = new Headers({ "Content-Type": "application/json" });
+const mockContext: Context = {
+  session: null,
+  headers: mockHeaders,
+  db: mockDb,
+};
 
 describe("getUserList", () => {
   beforeEach(() => {
