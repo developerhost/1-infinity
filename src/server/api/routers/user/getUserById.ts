@@ -1,10 +1,6 @@
 import { TRPCError } from "@trpc/server";
-import { type PrismaClient } from "@prisma/client"; // Prisma クライアント型
 import { z } from "zod";
-
-type Context = {
-  db: PrismaClient;
-};
+import type { Context } from "../types/context";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getUserByIdInput = z.object({ id: z.string() });
@@ -13,7 +9,7 @@ type GetUserByIdInput = z.infer<typeof getUserByIdInput>;
 /**
  * 指定されたIDに基づいてユーザー情報を取得
  *
- * @param {Object} params - パラメータオブジェクト
+ * @param {Object} params
  * @param {Context} params.ctx - コンテキストオブジェクト
  * @param {GetUserByIdInput} params.input - ユーザーIDを含む入力オブジェクト
  * @returns {Promise<Object>}

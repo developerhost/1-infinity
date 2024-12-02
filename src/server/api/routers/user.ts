@@ -8,23 +8,14 @@ import { TRPCError } from "@trpc/server";
 import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
 import { extractPublicId } from "cloudinary-build-url";
 import { getUserById } from "./user/getUserById";
+import { getUserList } from "./user/getUserList";
 
 export const userRouter = createTRPCRouter({
   getUserById: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(getUserById),
 
-  getUserList: publicProcedure.query(async ({ ctx }) => {
-    const users = await ctx.db.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        image: true,
-      },
-      take: 100,
-    });
-    return users;
-  }),
+  getUserList: publicProcedure.query(getUserList),
 
   updateUser: protectedProcedure
     .input(
