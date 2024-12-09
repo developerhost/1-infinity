@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
+
 import "server-only";
 
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
@@ -22,7 +24,7 @@ const createContext = cache(() => {
 });
 
 const getQueryClient = cache(createQueryClient);
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const caller = createCaller(createContext);
 
 export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
