@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+
+import { GeistSans } from "geist/font/sans";
 
 import { TRPCReactProvider } from "@/trpc/react";
 
@@ -22,6 +23,32 @@ export const metadata: Metadata = {
   description:
     "1-infinity は1/2をひたすら当てていき、ベスト記録を目指すシンプルなブラウザゲームです。",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  openGraph: {
+    type: "website",
+    title: "1-infinity 1/2をひたすら当てていくゲーム",
+    description:
+      "1-infinity は1/2をひたすら当てていき、ベスト記録を目指すシンプルなブラウザゲームです。",
+    siteName: "1-infinity",
+    url: "https://1-infinity.vercel.app/",
+    images: {
+      url: "/assets/opengraph-image.png",
+      type: "image/png",
+      width: 1200,
+      height: 630,
+    },
+  },
+  twitter: {
+    title: "1-infinity 1/2をひたすら当てていくゲーム",
+    description:
+      "1-infinity は1/2をひたすら当てていき、ベスト記録を目指すシンプルなブラウザゲームです。",
+    images: {
+      url: "/assets/opengraph-image.png",
+      type: "image/png",
+      width: 1200,
+      height: 630,
+    },
+    card: "summary",
+  },
 };
 
 export default function RootLayout({
