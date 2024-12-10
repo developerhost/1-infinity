@@ -1,53 +1,37 @@
 import { TILES } from "@/app/constants";
+import {
+  type Position,
+  type Direction,
+  ROOM_MAP,
+  type Row,
+  type Col,
+} from "./const";
 
-type Position = {
-  col: number;
-  row: number;
-};
-
-type DirectionMap = {
-  ArrowDown: "ArrowDown";
-  ArrowLeft: "ArrowLeft";
-  ArrowRight: "ArrowRight";
-  ArrowUp: "ArrowUp";
-};
-
-type Direction = DirectionMap[keyof DirectionMap];
-
-function canMoveToTile(tile: number | undefined): boolean {
-  if (tile === undefined) return false;
+function canMoveToTile(tile: number): boolean {
   return tile === TILES.HERO || tile === TILES.FLOOR;
 }
+
+const decrementRow = (row: Row): Row => (row - 1 || 0) as Row;
+const incrementRow = (row: Row): Row =>
+  (ROOM_MAP.length - 1 > row ? row + 1 : row) as Row;
+const decrementCol = (col: Col): Col => (col - 1 || 0) as Col;
+const incrementCol = (col: Col): Col =>
+  (ROOM_MAP[0].length - 1 > col ? col + 1 : col) as Col;
 
 export function moveHero(
   direction: Direction,
   prevPosition: Position,
-  roomMap: number[][],
 ): Position {
   const { row, col } = prevPosition;
 
-  let targetRow = row;
-  let targetCol = col;
+  const targetMap = {
+    ArrowUp: { row: decrementRow(row), col },
+    ArrowDown: { row: incrementRow(row), col },
+    ArrowLeft: { row, col: decrementCol(col) },
+    ArrowRight: { row, col: incrementCol(col) },
+  } as const satisfies Record<Direction, Position>;
 
-  switch (direction) {
-    case "ArrowUp":
-      targetRow = row - 1;
-      break;
-    case "ArrowDown":
-      targetRow = row + 1;
-      break;
-    case "ArrowLeft":
-      targetCol = col - 1;
-      break;
-    case "ArrowRight":
-      targetCol = col + 1;
-      break;
-  }
-
-  const targetTile = roomMap[targetRow]?.[targetCol];
-  if (canMoveToTile(targetTile)) {
-    return { row: targetRow, col: targetCol };
-  } else {
-    return prevPosition;
-  }
+  const targetPosition: Position = targetMap[direction];
+  const targetTile = ROOM_MAP[targetPosition.row][targetPosition.col];
+  return canMoveToTile(targetTile) ? targetPosition : prevPosition;
 }

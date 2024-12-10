@@ -2,31 +2,13 @@ import { useState } from "react";
 
 import { useKey } from "react-use";
 import { moveHero } from "./moveHero";
+import { type Direction, type Position } from "./const";
 
-type Position = {
-  col: number;
-  row: number;
-};
-
-type DirectionMap = {
-  ArrowDown: "ArrowDown";
-  ArrowLeft: "ArrowLeft";
-  ArrowRight: "ArrowRight";
-  ArrowUp: "ArrowUp";
-};
-
-type Direction = DirectionMap[keyof DirectionMap];
-
-export function useHeroMovement(
-  initialPosition: Position,
-  roomMap: number[][],
-) {
+export function useHeroMovement(initialPosition: Position) {
   const [heroPosition, setHeroPosition] = useState(initialPosition);
 
   const handleMoveHero = (direction: Direction) => {
-    setHeroPosition((prevPosition) =>
-      moveHero(direction, prevPosition, roomMap),
-    );
+    setHeroPosition((prevPosition) => moveHero(direction, prevPosition));
   };
 
   // キーボード入力を監視してキャラクターを移動させる
