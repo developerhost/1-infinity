@@ -11,12 +11,12 @@ function canMoveToTile(tile: number): boolean {
   return tile === TILES.HERO || tile === TILES.FLOOR;
 }
 
-const decrementRow = (row: Row): Row => (row - 1 || 0) as Row;
+const decrementRow = (row: Row): Row => Math.max(row - 1, 0) as Row;
 const incrementRow = (row: Row): Row =>
-  (ROOM_MAP.length - 1 > row ? row + 1 : row) as Row;
-const decrementCol = (col: Col): Col => (col - 1 || 0) as Col;
+  Math.min(ROOM_MAP.length - 1, row + 1) as Row;
+const decrementCol = (col: Col): Col => Math.max(col - 1, 0) as Col;
 const incrementCol = (col: Col): Col =>
-  (ROOM_MAP[0].length - 1 > col ? col + 1 : col) as Col;
+  Math.min(ROOM_MAP[0].length - 1, col + 1) as Col;
 
 export function moveHero(
   direction: Direction,
