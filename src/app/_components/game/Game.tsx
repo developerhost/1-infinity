@@ -6,28 +6,19 @@ import RecordDisplay from "./RecordDisplay";
 import GameController from "./controller/GameController";
 import { useHeroMovement } from "./useHeroMovement";
 import { initialPosition } from "./const";
+import { useLocalStorage } from "react-use";
 
 const Game = () => {
   const [record, setRecord] = useState<number>(1); // 1 -> 1/2, 2 -> 1/4, etc.
-  const [bestRecord, setBestRecord] = useState<number>(1);
+  const [bestRecord = 0, setBestRecord] = useLocalStorage<number>(
+    "bestRecord",
+    1,
+  );
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   // TODO: 勇者の移動処理を追加
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { heroPosition, moveHero } = useHeroMovement(initialPosition);
-
-  // オプション: ローカルストレージからベスト記録を取得
-  useEffect(() => {
-    const storedBestRecord = localStorage.getItem("bestRecord");
-    if (storedBestRecord) {
-      setBestRecord(Number(storedBestRecord));
-    }
-  }, []);
-
-  // オプション: ベスト記録が更新されたらローカルストレージに保存
-  useEffect(() => {
-    localStorage.setItem("bestRecord", bestRecord.toString());
-  }, [bestRecord]);
 
   const handleButtonClick = () => {
     const correct = Math.random() < 0.5; // 1/2の確率で正解
