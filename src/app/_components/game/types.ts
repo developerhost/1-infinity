@@ -1,3 +1,5 @@
+// TODO: ドメインに関与しない型はルートのtypes.tsにおいて、型にはdocを追加する
+
 type Prettify<T> = { [K in keyof T]: T[K] };
 
 type Enumerate<
