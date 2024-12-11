@@ -2,31 +2,16 @@ import { useState } from "react";
 
 import { useKey } from "react-use";
 import { moveHero } from "./moveHero";
+import { type GameGrid, type Direction, type Position } from "./types";
 
-type Position = {
-  col: number;
-  row: number;
-};
-
-type DirectionMap = {
-  ArrowDown: "ArrowDown";
-  ArrowLeft: "ArrowLeft";
-  ArrowRight: "ArrowRight";
-  ArrowUp: "ArrowUp";
-};
-
-type Direction = DirectionMap[keyof DirectionMap];
-
-export function useHeroMovement(
-  initialPosition: Position,
-  roomMap: number[][],
+export function useHeroMovement<T extends GameGrid>(
+  map: T,
+  initialPosition: Position<T>,
 ) {
   const [heroPosition, setHeroPosition] = useState(initialPosition);
 
   const handleMoveHero = (direction: Direction) => {
-    setHeroPosition((prevPosition) =>
-      moveHero(direction, prevPosition, roomMap),
-    );
+    setHeroPosition((prevPosition) => moveHero(map, direction, prevPosition));
   };
 
   // キーボード入力を監視してキャラクターを移動させる

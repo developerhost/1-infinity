@@ -1,42 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ChoicesButtonGroup from "./ChoicesButtonGroup";
 import RecordDisplay from "./RecordDisplay";
 import GameController from "./controller/GameController";
 import { useHeroMovement } from "./useHeroMovement";
+import { useLocalStorage } from "react-use";
+import { initialPosition, ROOM_MAP } from "./const";
 
 const Game = () => {
   const [record, setRecord] = useState<number>(1); // 1 -> 1/2, 2 -> 1/4, etc.
-  const [bestRecord, setBestRecord] = useState<number>(1);
+  const [bestRecord = 0, setBestRecord] = useLocalStorage<number>(
+    "bestRecord",
+    1,
+  );
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-
-  const roomMap = [
-    [9, 9, 9, 9, 9, 9, 9, 9, 9],
-    [9, 4, 5, 8, 8, 8, 0, 6, 9],
-    [9, 8, 8, 8, 8, 8, 8, 8, 9],
-    [9, 8, 8, 8, 1, 8, 8, 2, 9],
-    [9, 9, 9, 9, 9, 9, 9, 9, 9],
-  ];
-
-  const initialPosition = { row: 1, col: 6 };
 
   // TODO: 勇者の移動処理を追加
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { heroPosition, moveHero } = useHeroMovement(initialPosition, roomMap);
-
-  // オプション: ローカルストレージからベスト記録を取得
-  useEffect(() => {
-    const storedBestRecord = localStorage.getItem("bestRecord");
-    if (storedBestRecord) {
-      setBestRecord(Number(storedBestRecord));
-    }
-  }, []);
-
-  // オプション: ベスト記録が更新されたらローカルストレージに保存
-  useEffect(() => {
-    localStorage.setItem("bestRecord", bestRecord.toString());
-  }, [bestRecord]);
+  const { heroPosition, moveHero } = useHeroMovement(ROOM_MAP, initialPosition);
 
   const handleButtonClick = () => {
     const correct = Math.random() < 0.5; // 1/2の確率で正解

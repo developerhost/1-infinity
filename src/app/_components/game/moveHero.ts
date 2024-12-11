@@ -1,53 +1,40 @@
 import { TILES } from "@/app/constants";
-
-type Position = {
-  col: number;
-  row: number;
-};
-
-type DirectionMap = {
-  ArrowDown: "ArrowDown";
-  ArrowLeft: "ArrowLeft";
-  ArrowRight: "ArrowRight";
-  ArrowUp: "ArrowUp";
-};
-
-type Direction = DirectionMap[keyof DirectionMap];
+import {
+  type Position,
+  type Direction,
+  type Row,
+  type Col,
+  type GameGrid,
+} from "./types";
 
 function canMoveToTile(tile: number | undefined): boolean {
-  if (tile === undefined) return false;
   return tile === TILES.HERO || tile === TILES.FLOOR;
 }
 
-export function moveHero(
+const decrementRow = <T extends GameGrid>(row: Row<T>): Row<T> =>
+  Math.max(row - 1, 0) as Row<T>;
+const incrementRow = <T extends GameGrid>(map: T, row: Row<T>): Row<T> =>
+  Math.min(map.length - 1, row + 1) as Row<T>;
+const decrementCol = <T extends GameGrid>(col: Col<T>): Col<T> =>
+  Math.max(col - 1, 0) as Col<T>;
+const incrementCol = <T extends GameGrid>(map: T, col: Col<T>): Col<T> =>
+  Math.min(map[0]?.length ?? 0 - 1, col + 1) as Col<T>;
+
+export function moveHero<T extends GameGrid>(
+  map: T,
   direction: Direction,
-  prevPosition: Position,
-  roomMap: number[][],
-): Position {
+  prevPosition: Position<T>,
+): Position<T> {
   const { row, col } = prevPosition;
 
-  let targetRow = row;
-  let targetCol = col;
+  const targetMap = {
+    ArrowUp: { row: decrementRow<T>(row), col },
+    ArrowDown: { row: incrementRow(map, row), col },
+    ArrowLeft: { row, col: decrementCol(col) },
+    ArrowRight: { row, col: incrementCol(map, col) },
+  } as const satisfies Record<Direction, Position<T>>;
 
-  switch (direction) {
-    case "ArrowUp":
-      targetRow = row - 1;
-      break;
-    case "ArrowDown":
-      targetRow = row + 1;
-      break;
-    case "ArrowLeft":
-      targetCol = col - 1;
-      break;
-    case "ArrowRight":
-      targetCol = col + 1;
-      break;
-  }
-
-  const targetTile = roomMap[targetRow]?.[targetCol];
-  if (canMoveToTile(targetTile)) {
-    return { row: targetRow, col: targetCol };
-  } else {
-    return prevPosition;
-  }
+  const targetPosition: Position<T> = targetMap[direction];
+  const targetTile = map[targetPosition.row]?.[targetPosition.col];
+  return canMoveToTile(targetTile) ? targetPosition : prevPosition;
 }
