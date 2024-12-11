@@ -2,13 +2,16 @@ import { useState } from "react";
 
 import { useKey } from "react-use";
 import { moveHero } from "./moveHero";
-import { type Direction, type Position } from "./const";
+import { type GameGrid, type Direction, type Position } from "./types";
 
-export function useHeroMovement(initialPosition: Position) {
+export function useHeroMovement<T extends GameGrid>(
+  map: T,
+  initialPosition: Position<T>,
+) {
   const [heroPosition, setHeroPosition] = useState(initialPosition);
 
   const handleMoveHero = (direction: Direction) => {
-    setHeroPosition((prevPosition) => moveHero(direction, prevPosition));
+    setHeroPosition((prevPosition) => moveHero(map, direction, prevPosition));
   };
 
   // キーボード入力を監視してキャラクターを移動させる

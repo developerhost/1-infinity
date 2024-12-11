@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ChoicesButtonGroup from "./ChoicesButtonGroup";
 import RecordDisplay from "./RecordDisplay";
 import GameController from "./controller/GameController";
 import { useHeroMovement } from "./useHeroMovement";
-import { initialPosition } from "./const";
 import { useLocalStorage } from "react-use";
+import { initialPosition, ROOM_MAP } from "./const";
 
 const Game = () => {
   const [record, setRecord] = useState<number>(1); // 1 -> 1/2, 2 -> 1/4, etc.
@@ -18,7 +18,7 @@ const Game = () => {
 
   // TODO: 勇者の移動処理を追加
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { heroPosition, moveHero } = useHeroMovement(initialPosition);
+  const { heroPosition, moveHero } = useHeroMovement(ROOM_MAP, initialPosition);
 
   const handleButtonClick = () => {
     const correct = Math.random() < 0.5; // 1/2の確率で正解
