@@ -1,33 +1,25 @@
-// TODO: ドメインに関与しない型はルートのtypes.tsにおいて、型にはdocを追加する
+import type { Prettify, NumberRange } from "@/app/types";
 
-type Prettify<T> = { [K in keyof T]: T[K] };
-
-type Enumerate<
-  N extends number,
-  Acc extends number[] = [],
-> = Acc["length"] extends N
-  ? Acc[number]
-  : Enumerate<N, [...Acc, Acc["length"]]>;
-
-type NumberRange<F extends number, T extends number> = Exclude<
-  Enumerate<T>,
-  Enumerate<F>
->;
-
+/* ゲームのマップを表す2次元配列を表します */
 export type GameGrid = ReadonlyArray<ReadonlyArray<number>>;
 
+/* ゲームのマップ上の行を表します */
 export type Row<T extends GameGrid> = Prettify<NumberRange<0, T["length"]>> &
   number;
+
+/* ゲームのマップ上の列を表します */
 export type Col<T extends GameGrid> = Prettify<
   NumberRange<0, T[number]["length"]>
 > &
   number;
 
+/* ゲームのマップ上の位置を表します */
 export type Position<T extends GameGrid> = {
   row: Row<T>;
   col: Col<T>;
 };
 
+/* ゲームのマップ上の方向を表します */
 export const Direction = [
   "ArrowDown",
   "ArrowLeft",
