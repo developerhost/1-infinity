@@ -18,7 +18,6 @@ const Game = () => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   // TODO: 勇者の移動処理を追加
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { heroPosition, moveHero } = useHeroMovement(ROOM_MAP, initialPosition);
 
   const handleButtonClick = () => {
