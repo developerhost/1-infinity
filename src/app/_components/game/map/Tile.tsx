@@ -27,6 +27,10 @@ export const Tile = ({
       }}
       role="button"
       tabIndex={0}
+      style={{
+        WebkitUserSelect: "none" /* Safari */,
+        userSelect: "none",
+      }}
     >
       <TileContent
         isTreasureGreenGoldTaken={isTreasureGreenGoldTaken}
@@ -35,8 +39,16 @@ export const Tile = ({
         type={type}
       />
       {type !== TILES.WALL && (
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        <Image alt="Floor" className="absolute z-0 h-full w-full" src={Floor} />
+        <Image
+          alt="Floor"
+          className="absolute z-0 h-full w-full"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          src={Floor}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
+        />
       )}
     </div>
   );

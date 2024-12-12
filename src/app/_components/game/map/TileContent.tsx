@@ -45,6 +45,10 @@ const TileContent = ({
           className="absolute z-10 h-full w-full"
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={Hero}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
           {...interactiveProps}
         />
       );
@@ -55,6 +59,10 @@ const TileContent = ({
           className="absolute z-10 h-full w-full"
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={Murabito}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
           {...interactiveProps}
         />
       );
@@ -65,6 +73,10 @@ const TileContent = ({
           className="absolute z-10 h-full w-full"
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={Cat}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
           {...interactiveProps}
         />
       );
@@ -75,6 +87,10 @@ const TileContent = ({
           className="absolute z-10 h-full w-full"
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={isTreasureRedGoldTaken ? TreasureRedGoldEmpty : TreasureRedGold}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
           {...interactiveProps}
         />
       );
@@ -89,21 +105,50 @@ const TileContent = ({
               ? TreasureGreenGoldEmpty
               : TreasureGreenGold
           }
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
           {...interactiveProps}
         />
       );
     case TILES.BED:
       return (
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        <Image alt="Bed" className="absolute z-10 h-full w-full" src={Bed} />
+        <Image
+          alt="Bed"
+          className="absolute z-10 h-full w-full"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          src={Bed}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
+        />
       );
     case TILES.WALL:
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      return <Image alt="Wall" src={Wall} />;
+      return (
+        <Image
+          alt="Wall"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          src={Wall}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
+        />
+      );
     default:
       return (
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        <Image alt="Floor" className="absolute h-full w-full" src={Floor} />
+        <Image
+          alt="Floor"
+          className="absolute h-full w-full"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          src={Floor}
+          style={{
+            WebkitUserSelect: "none" /* Safari */,
+            userSelect: "none",
+          }}
+        />
       );
   }
 };

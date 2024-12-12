@@ -37,7 +37,13 @@ const Game = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="flex flex-col items-center"
+      style={{
+        WebkitUserSelect: "none" /* Safari */,
+        userSelect: "none",
+      }}
+    >
       <TileList heroPosition={heroPosition} map={ROOM_MAP} />
       <GameController
         moveHero={moveHero}

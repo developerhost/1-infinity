@@ -21,7 +21,13 @@ export const TileList = <T extends GameGrid>({
   const treasureRedGoldTaken = false;
 
   return (
-    <div className="grid h-full w-full grid-cols-9 gap-0.5">
+    <div
+      className="grid h-full w-full grid-cols-9 gap-0.5"
+      style={{
+        WebkitUserSelect: "none" /* Safari */,
+        userSelect: "none",
+      }}
+    >
       {map.flatMap((row, rowIndex) =>
         row.map((tile, colIndex) => {
           const currentRow = rowIndex as Row<T>;
@@ -43,6 +49,10 @@ export const TileList = <T extends GameGrid>({
             <div
               className="flex items-center justify-center border border-gray-700 bg-gray-800"
               key={`${rowIndex}-${colIndex}`}
+              style={{
+                WebkitUserSelect: "none" /* Safari */,
+                userSelect: "none",
+              }}
             >
               <Tile
                 isTreasureGreenGoldTaken={treasureGreenGoldTaken}
